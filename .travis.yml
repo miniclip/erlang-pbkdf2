@@ -6,6 +6,4 @@ otp_release:
    - 21.3
    - 22.3
    - 23.1
-script: >
-  curl https://s3.amazonaws.com/rebar3/rebar3 -o rebar3
-  && ./rebar3 do xref, eunit, ct, dialyze
+script: rebar3 do xref, eunit, ct, dialyze
