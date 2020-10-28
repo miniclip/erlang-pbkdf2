@@ -137,9 +137,9 @@ pbkdf2(MacFunc, Password, Salt, Iterations, BlockIndex, Iteration, Prev, Acc) ->
 resolve_mac_func({hmac, DigestFunc}) ->
 	fun(Key, Data) ->
 		%crypto:hmac(DigestFunc, Key, Data)
-		HMAC = crypto:hmac_init(DigestFunc, Key),
-		HMAC1 = crypto:hmac_update(HMAC, Data),
-		crypto:hmac_final(HMAC1)
+		HMAC = hmac_init(DigestFunc, Key),
+		HMAC1 = hmac_update(HMAC, Data),
+		hmac_final(HMAC1)
 	end;
 
 resolve_mac_func(MacFunc) when is_function(MacFunc) ->
@@ -153,6 +153,28 @@ resolve_mac_func(sha224) -> resolve_mac_func({hmac, sha224});
 resolve_mac_func(sha256) -> resolve_mac_func({hmac, sha256});
 resolve_mac_func(sha384) -> resolve_mac_func({hmac, sha384});
 resolve_mac_func(sha512) -> resolve_mac_func({hmac, sha512}).
+
+-ifdef(old_hmac_api).
+hmac_init(Type, Key) ->
+    crypto:hmac_init(Type, Key).
+
+hmac_update(State, Data) ->
+    crypto:hmac_update(State, Data).
+
+hmac_final(State) ->
+    crypto:hmac_final(State).
+
+-else.
+hmac_init(Type, Key) ->
+    crypto:mac_init(hmac, Type, Key).
+
+hmac_update(State, Data) ->
+    crypto:mac_update(State, Data).
+
+hmac_final(State) ->
+    crypto:mac_final(State).
+
+-endif.
 
 %----------------------------------------------------------------------------------------------------------------------
 
