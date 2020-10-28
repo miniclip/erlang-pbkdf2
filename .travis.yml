@@ -5,5 +5,5 @@ otp_release:
    - 20.3
    - 21.3
    - 22.3
-   - 23.1
+   - 23.0
 script: rebar3 do xref, eunit, ct, dialyzer
