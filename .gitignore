@@ -1,5 +1,4 @@
 _build/
 ebin/
 .eunit/
-_build
 .eqc-info
