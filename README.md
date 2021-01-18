@@ -1,6 +1,8 @@
 erlang-pbkdf2
 =============
 
+![build](https://github.com/miniclip/erlang-pbkdf2/workflows/build/badge.svg)
+
 A [PBKDF2][] implementation for [Erlang][] extracted from [Apache CouchDB][].
 
 [PBKDF2]: http://en.wikipedia.org/wiki/PBKDF2
