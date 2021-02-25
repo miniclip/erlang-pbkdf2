@@ -79,7 +79,7 @@ gen_group({GName, Vectors}) ->
     Tests.
 
 -spec tester(GName :: gname(), Index :: pos_integer(), Vector :: vector())
-            -> [tuple()].
+            -> tuple().
 
 tester(GName, Index, Vector) ->
     Title = lists:flatten(io_lib:format("~s(~b)", [GName, Index])),
