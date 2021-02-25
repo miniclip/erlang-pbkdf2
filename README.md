@@ -1,7 +1,7 @@
-erlang-pbkdf2
-=============
+# erlang-pbkdf2 [![GitHub Actions CI][ci-img]][ci]
 
-![build](https://github.com/miniclip/erlang-pbkdf2/workflows/build/badge.svg)
+[ci]: https://github.com/miniclip/erlang-pbkdf2
+[ci-img]: https://github.com/miniclip/erlang-pbkdf2/workflows/build/badge.svg
 
 A [PBKDF2][] implementation for [Erlang][] extracted from [Apache CouchDB][].
 
@@ -9,27 +9,30 @@ A [PBKDF2][] implementation for [Erlang][] extracted from [Apache CouchDB][].
 [Erlang]: http://www.erlang.org
 [Apache CouchDB]: http://couchdb.apache.org
 
+## Building
 
-Building
---------
+`erlang-pbkdf2` uses [rebar][] to manage the build process. To build the project,
+run:
 
-`erlang-pbkdf2` uses [rebar][] to manage the build process. To build the project, run:
-
-	./rebar compile
+```bash
+./rebar compile
+```
 
 You can then run the `xref` and `eunit` tests:
 
-	./rebar xref eunit
+```bash
+./rebar xref eunit
+```
 
 If you want to remove all generated files, run:
 
-	./rebar clean
+```bash
+./rebar clean
+```
 
 [rebar]: https://github.com/rebar/rebar/wiki
 
-
-Usage
------
+## Usage
 
 ```erlang
 OriginalPassword = <<"password">>.
@@ -54,28 +57,26 @@ If you're curious what `getpass/0` would look like, here's a sample implementati
 ```erlang
 % Get the password from the user.
 getpass() ->
-	% Store current options for stdio.
-	InitialIOOpts = io:getopts(),
-	% Disable input character echo.
-	ok = io:setopts([{echo, false}]),
-	% Prompt the user for a password.
-	EnteredPassword = io:get_line("Password: "),
-	% Restore original options for stdio.
-	ok = io:setopts(InitialIOOpts),
-	% Print a newline, since we had local echo disabled above.
-	io:format("\n"),
-	% Remove trailing newline character, if present.
-	case lists:reverse(EnteredPassword) of
-		[$\n | Rest] ->
-			lists:reverse(Rest);
-		_ ->
-			EnteredPassword
-	end.
+    % Store current options for stdio.
+    InitialIOOpts = io:getopts(),
+    % Disable input character echo.
+    ok = io:setopts([{echo, false}]),
+    % Prompt the user for a password.
+    EnteredPassword = io:get_line("Password: "),
+    % Restore original options for stdio.
+    ok = io:setopts(InitialIOOpts),
+    % Print a newline, since we had local echo disabled above.
+    io:format("\n"),
+    % Remove trailing newline character, if present.
+    case lists:reverse(EnteredPassword) of
+        [$\n | Rest] ->
+            lists:reverse(Rest);
+        _ ->
+            EnteredPassword
+    end.
 ```
 
-
-Cryptographic Software Notice
------------------------------
+## Cryptographic Software Notice
 
 This distribution includes cryptographic software. The country in which you
 currently reside may have restrictions on the import, possession, use, and/or

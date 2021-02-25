@@ -59,7 +59,7 @@
 vectors_test_() ->
     {_, _, Beam} = code:get_object_code(?MODULE),
     TestDir = filename:join(filename:dirname(filename:dirname(Beam)), test),
-    VFiles  = filelib:wildcard(filename:join(TestDir, "*-vectors.config")),
+    VFiles  = filelib:wildcard(filename:join(TestDir, "config/*-vectors.config")),
     FSets   = [T || {ok, T} <- [file:consult(F) || F <- VFiles, filelib:is_regular(F)]],
     VSets   = lists:append(FSets),
     Tests   = lists:append([gen_group(Elem) || Elem <- VSets]),

@@ -1,4 +1,5 @@
-_build/
-ebin/
-.eunit/
-.eqc-info
+.rebar3
+_build
+erl_crash.dump
+log
+rebar3.crashdump

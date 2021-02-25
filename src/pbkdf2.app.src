@@ -1,8 +1,15 @@
 {application, pbkdf2, [
-	{description, "Erlang PBKDF2 Key Derivation Function"},
-	{vsn, git},
-	{registered, []},
-	{applications, [kernel, stdlib, crypto]},
-	{modules, [pbkdf2]},
-	{env, []}
+    {description, "Erlang PBKDF2 Key Derivation Function"},
+    {vsn, git},
+    {registered, []},
+
+    {applications, [
+        % OTP dependencies
+        crypto,
+        kernel,
+        stdlib
+        % External dependencies
+    ]},
+
+    {env, []}
 ]}.
