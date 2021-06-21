@@ -8,7 +8,7 @@ MAKEFLAGS += --no-builtin-rules
 version: upgrade clean compile check test edoc
 .PHONY: version
 
-upgrade: upgrade-rebar3_lint upgrade-eqc_rebar upgrade-rebar3_hex
+upgrade: upgrade-rebar3_lint upgrade-eqc_rebar upgrade-rebar3_hex upgrade-rebar3_hank
 	@rebar3 do unlock,upgrade
 .PHONY: upgrade
 
@@ -24,6 +24,10 @@ upgrade-rebar3_hex:
 	@rebar3 plugins upgrade rebar3_hex
 .PHONY: upgrade-rebar3_hex
 
+upgrade-rebar3_hank:
+	@rebar3 plugins upgrade rebar3_hank
+.PHONY: upgrade-rebar3_hank
+
 clean:
 	@rebar3 clean -a
 .PHONY: clean
@@ -32,7 +36,7 @@ compile:
 	@rebar3 compile
 .PHONY: compile
 
-check: xref dialyzer elvis-rock
+check: xref dialyzer elvis-rock hank
 .PHONY: check
 
 xref:
@@ -46,6 +50,10 @@ dialyzer:
 elvis-rock:
 	@rebar3 lint
 .PHONY: elvis-rock
+
+hank:
+	@rebar3 hank
+.PHONY: hank
 
 test:
 .NOTPARALLEL: test
